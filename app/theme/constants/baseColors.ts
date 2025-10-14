@@ -1,0 +1,92 @@
+import { BaseColors } from "../../types/style";
+
+export const BASE_COLORS: BaseColors = {
+  // 蓝色系
+  BLUE_50: '#E3F2FD',
+  BLUE_100: '#BBDEFB',
+  BLUE_200: '#90CAF9',
+  BLUE_300: '#64B5F6',
+  BLUE_400: '#42A5F5',
+  BLUE_500: '#2196F3',
+  BLUE_600: '#1E88E5',
+  BLUE_700: '#1976D2',
+  BLUE_800: '#1565C0',
+  BLUE_900: '#0D47A1',
+  
+  // 蓝绿色系
+  TEAL_50: '#E0F2F1',
+  TEAL_100: '#B2DFDB',
+  TEAL_200: '#80CBC4',
+  TEAL_300: '#4DB6AC',
+  TEAL_400: '#26A69A',
+  TEAL_500: '#009688',
+  TEAL_600: '#00897B',
+  TEAL_700: '#00796B',
+  TEAL_800: '#00695C',
+  TEAL_900: '#004D40',
+  
+  // 绿色系
+  GREEN_50: '#E8F5E8',
+  GREEN_100: '#C8E6C9',
+  GREEN_200: '#A5D6A7',
+  GREEN_300: '#81C784',
+  GREEN_400: '#66BB6A',
+  GREEN_500: '#4CAF50',
+  GREEN_600: '#43A047',
+  GREEN_700: '#388E3C',
+  GREEN_800: '#2E7D32',
+  GREEN_900: '#1B5E20',
+  
+  // 橙色系
+  ORANGE_50: '#FFF3E0',
+  ORANGE_100: '#FFE0B2',
+  ORANGE_200: '#FFCC80',
+  ORANGE_300: '#FFB74D',
+  ORANGE_400: '#FFA726',
+  ORANGE_500: '#FF9800',
+  ORANGE_600: '#FB8C00',
+  ORANGE_700: '#F57C00',
+  ORANGE_800: '#EF6C00',
+  ORANGE_900: '#E65100',
+  
+  // 红色系
+  RED_50: '#FFEBEE',
+  RED_100: '#FFCDD2',
+  RED_200: '#EF9A9A',
+  RED_300: '#E57373',
+  RED_400: '#EF5350',
+  RED_500: '#F44336',
+  RED_600: '#E53935',
+  RED_700: '#D32F2F',
+  RED_800: '#C62828',
+  RED_900: '#B71C1C',
+  
+  // 黄色系
+  YELLOW_50: '#FFFDE7',
+  YELLOW_100: '#FFF9C4',
+  YELLOW_200: '#FFF59D',
+  YELLOW_300: '#FFF176',
+  YELLOW_400: '#FFEE58',
+  YELLOW_500: '#FFEB3B',
+  YELLOW_600: '#FDD835',
+  YELLOW_700: '#FBC02D',
+  YELLOW_800: '#F9A825',
+  YELLOW_900: '#F57F17',
+  
+  // 中性灰色系
+  GRAY_50: '#FAFAFA',
+  GRAY_100: '#F5F5F5',
+  GRAY_200: '#EEEEEE',
+  GRAY_300: '#E0E0E0',
+  GRAY_400: '#BDBDBD',
+  GRAY_500: '#9E9E9E',
+  GRAY_600: '#757575',
+  GRAY_700: '#616161',
+  GRAY_800: '#424242',
+  GRAY_900: '#212121',
+  
+  // 纯色
+  WHITE: '#FFFFFF',
+  BLACK: '#000000',
+  TRANSPARENT: 'transparent',
+};
