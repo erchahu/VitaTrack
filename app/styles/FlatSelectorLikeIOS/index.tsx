@@ -100,12 +100,11 @@ const FlatSelectorLikeIOS = ({ data, defaultValue, onValueChange }: FlatSelector
         renderItem={({ item, index }) => (
           <RowText 
             height={ITEM_HEIGHT}
-            isChecked={item.key === selectedValue}
             onPress={() => scrollToIndex(index)}
           >
             <Text 
               style={{ 
-                fontSize: item.key === selectedValue ? 18 : 16,
+                fontSize: item.key === selectedValue ? 26 : 16,
                 fontWeight: item.key === selectedValue ? '600' : '400',
                 color: item.key === selectedValue ? '#007AFF' : '#8E8E93',
                 textAlign: 'center',

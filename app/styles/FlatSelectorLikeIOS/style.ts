@@ -3,7 +3,7 @@ import LinearGradient from 'react-native-linear-gradient';
 
 export const PickerContainer = styled.View`
   height: ${32 * 5}px;
-  width: 150px;
+  width: 300px;
   align-self: center;
   position: relative;
   background-color: #fafafa;
@@ -14,20 +14,12 @@ export const PickerContainer = styled.View`
 `;
 
 export const RowText = styled.TouchableOpacity<{
-  isChecked: boolean;
   height: number;
 }>`
   height: ${({ height }) => height}px;
   justify-content: center;
   align-items: center;
   background-color: transparent;
-  
-  ${({ isChecked }) => isChecked 
-    ? `
-      background-color: rgba(0, 122, 255, 0.08);
-    ` 
-    : ``
-  }
 `;
 
 export const GradientOverlay = styled(LinearGradient)<{ top?: boolean; bottom?: boolean }>`
@@ -54,9 +46,8 @@ export const SelectionIndicator = styled.View`
   margin-top: -${32 / 2}px;
   border-top-width: 1px;
   border-bottom-width: 1px;
-  border-top-color: #007AFF;
-  border-bottom-color: #007AFF;
-  background-color: rgba(0, 122, 255, 0.05);
+  border-top-color: ${({ theme }) => theme.colors.outline};
+  border-bottom-color: ${({ theme }) => theme.colors.outline};
   border-radius: 6px;
   z-index: 1;
   pointer-events: none;
