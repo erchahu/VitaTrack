@@ -37,10 +37,19 @@ const FlatSelectorLikeIOS = ({ data, defaultValue, onValueChange }: FlatSelector
 
   const defaultIndex = data.findIndex(item => item.key === defaultValue);
 
+  // 添加空白项以实现居中效果
+  const PADDING_COUNT = Math.floor(VISIBLE_ITEMS / 2); // 3个空白项
+  const paddedData = [
+    ...Array(PADDING_COUNT).fill({ key: 'padding-top', title: '' }),
+    ...data,
+    ...Array(PADDING_COUNT).fill({ key: 'padding-bottom', title: '' }),
+  ];
+  const adjustedDefaultIndex = defaultIndex + PADDING_COUNT;
+
   // 设置初始 progressValue 以确保默认选中项居中
   React.useEffect(() => {
-    if (defaultIndex >= 0) {
-      progressValue.value = defaultIndex;
+    if (adjustedDefaultIndex >= 0) {
+      progressValue.value = adjustedDefaultIndex;
     }
   }, []);
 
@@ -141,9 +150,9 @@ const FlatSelectorLikeIOS = ({ data, defaultValue, onValueChange }: FlatSelector
         width={300}
         height={ITEM_HEIGHT}
         vertical
-        data={data}
+        data={paddedData}
         renderItem={renderItem}
-        defaultIndex={defaultIndex >= 0 ? defaultIndex : 0}
+        defaultIndex={adjustedDefaultIndex >= 0 ? adjustedDefaultIndex : PADDING_COUNT}
         loop={false}
         pagingEnabled
         snapEnabled
@@ -155,8 +164,10 @@ const FlatSelectorLikeIOS = ({ data, defaultValue, onValueChange }: FlatSelector
           progressValue.value = absoluteProgress;
         }}
         onSnapToItem={(index) => {
-          if (index >= 0 && index < data.length) {
-            const selectedItem = data[index];
+          // 调整索引,排除 padding 项
+          const actualIndex = index - PADDING_COUNT;
+          if (actualIndex >= 0 && actualIndex < data.length) {
+            const selectedItem = data[actualIndex];
             onValueChange?.(selectedItem.key);
           }
         }}
