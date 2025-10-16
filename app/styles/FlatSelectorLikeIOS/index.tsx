@@ -1,11 +1,17 @@
-import React, { memo, useState, useRef } from "react"
-import { FlatList } from "react-native"
+import React, { memo, useRef } from "react"
+import { View } from "react-native"
+import Carousel from 'react-native-reanimated-carousel'
+import Animated, {
+  Extrapolation,
+  interpolate,
+  useAnimatedStyle,
+  useSharedValue,
+} from 'react-native-reanimated'
 import LinearGradient from 'react-native-linear-gradient'
-import { 
-  PickerContainer, 
-  RowText, 
+import {
+  PickerContainer,
   GradientOverlay,
-  SelectionIndicator 
+  SelectionIndicator
 } from "./style"
 import { Text } from "react-native-paper";
 
@@ -20,30 +26,70 @@ interface FlatSelectorLikeIOSProps {
   onValueChange?: (value: string) => void;
 }
 
-const ITEM_HEIGHT = 32;
+const ITEM_HEIGHT = 50;
 const VISIBLE_ITEMS = 5;
 const CONTAINER_HEIGHT = ITEM_HEIGHT * VISIBLE_ITEMS;
 
 const FlatSelectorLikeIOS = ({ data, defaultValue, onValueChange }: FlatSelectorLikeIOSProps) => {
-  const [selectedValue, setSelectedValue] = useState(defaultValue);
-  const flatListRef = useRef<FlatList>(null);
+  const carouselRef = useRef<any>(null);
+  const progressValue = useSharedValue(0);
 
-  const handleScroll = (event: any) => {
-    const y = event.nativeEvent.contentOffset.y;
-    const index = Math.round(y / ITEM_HEIGHT);
-    if (index >= 0 && index < data.length) {
-      const selectedItem = data[index];
-      setSelectedValue(selectedItem.key);
-      onValueChange?.(selectedItem.key);
-    }
-  };
+  const defaultIndex = data.findIndex(item => item.key === defaultValue);
 
-  const scrollToIndex = (index: number) => {
-    flatListRef.current?.scrollToIndex({
-      index,
-      animated: true,
-      viewPosition: 0.5
+  const renderItem = ({ item, index }: { item: FlatSelectorItem; index: number }) => {
+    const animatedStyle = useAnimatedStyle(() => {
+      const inputRange = [
+        index - 2,
+        index - 1,
+        index,
+        index + 1,
+        index + 2,
+      ];
+
+      // 中间项为1，向上下逐渐变小
+      const scale = interpolate(
+        progressValue.value,
+        inputRange,
+        [0.5, 0.7, 1, 0.7, 0.5],
+        Extrapolation.CLAMP
+      );
+
+      // 中间项完全不透明，向上下逐渐透明
+      const opacity = interpolate(
+        progressValue.value,
+        inputRange,
+        [0.2, 0.5, 1, 0.5, 0.2],
+        Extrapolation.CLAMP
+      );
+
+      return {
+        transform: [{ scale }],
+        opacity,
+      };
     });
+
+    return (
+      <View
+        style={{
+          height: ITEM_HEIGHT,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <Animated.View style={animatedStyle}>
+          <Text
+            style={{
+              fontSize: 26,
+              fontWeight: '600',
+              color: '#007AFF',
+              textAlign: 'center',
+            }}
+          >
+            {item.title}
+          </Text>
+        </Animated.View>
+      </View>
+    );
   };
 
   return (
@@ -78,43 +124,29 @@ const FlatSelectorLikeIOS = ({ data, defaultValue, onValueChange }: FlatSelector
 
       {/* 选中指示器 */}
       <SelectionIndicator />
-      
-      <FlatList
-        ref={flatListRef}
+
+      <Carousel
+        ref={carouselRef}
+        width={300}
+        height={CONTAINER_HEIGHT}
+        vertical
         data={data}
-        keyExtractor={(item) => item.key}
-        showsVerticalScrollIndicator={false}
-        snapToInterval={ITEM_HEIGHT}
-        decelerationRate="fast"
-        onMomentumScrollEnd={handleScroll}
-        onScrollEndDrag={handleScroll}
-        style={{ height: CONTAINER_HEIGHT }}
-        contentContainerStyle={{
-          paddingVertical: ITEM_HEIGHT * 2,
+        renderItem={renderItem}
+        defaultIndex={defaultIndex >= 0 ? defaultIndex : 0}
+        loop={false}
+        style={{
+          width: 300,
+          height: CONTAINER_HEIGHT,
         }}
-        getItemLayout={(data, index) => ({
-          length: ITEM_HEIGHT,
-          offset: ITEM_HEIGHT * index,
-          index,
-        })}
-        renderItem={({ item, index }) => (
-          <RowText 
-            height={ITEM_HEIGHT}
-            onPress={() => scrollToIndex(index)}
-          >
-            <Text 
-              style={{ 
-                fontSize: item.key === selectedValue ? 26 : 16,
-                fontWeight: item.key === selectedValue ? '600' : '400',
-                color: item.key === selectedValue ? '#007AFF' : '#8E8E93',
-                textAlign: 'center',
-              }}
-            >
-              {item.title}
-            </Text>
-          </RowText>
-        )}
-        initialScrollIndex={data.findIndex(item => item.key === defaultValue)}
+        onProgressChange={(_, absoluteProgress) => {
+          progressValue.value = absoluteProgress;
+        }}
+        onSnapToItem={(index) => {
+          if (index >= 0 && index < data.length) {
+            const selectedItem = data[index];
+            onValueChange?.(selectedItem.key);
+          }
+        }}
       />
     </PickerContainer>
   )
