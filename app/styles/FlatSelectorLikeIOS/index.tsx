@@ -1,10 +1,6 @@
 import React, { memo, useRef } from "react"
 import { View } from "react-native"
 import Carousel from 'react-native-reanimated-carousel'
-import {
-  Extrapolation,
-  interpolate,
-} from 'react-native-reanimated'
 import LinearGradient from 'react-native-linear-gradient'
 import {
   PickerContainer,
@@ -33,34 +29,6 @@ const FlatSelectorLikeIOS = ({ data, defaultValue, onValueChange }: FlatSelector
 
   const defaultIndex = data.findIndex(item => item.key === defaultValue);
 
-  const animationStyle = React.useCallback(
-    (value: number) => {
-      'worklet';
-
-      const inputRange = [-3, -2, -1, 0, 1, 2, 3];
-
-      const scale = interpolate(
-        value,
-        inputRange,
-        [0.4, 0.5, 0.7, 1, 0.7, 0.5, 0.4],
-        Extrapolation.CLAMP
-      );
-
-      const opacity = interpolate(
-        value,
-        inputRange,
-        [0.1, 0.2, 0.5, 1, 0.5, 0.2, 0.1],
-        Extrapolation.CLAMP
-      );
-
-      return {
-        transform: [{ scale }],
-        opacity,
-      };
-    },
-    []
-  );
-
   const renderItem = ({ item }: { item: FlatSelectorItem }) => {
     return (
       <View
@@ -88,28 +56,28 @@ const FlatSelectorLikeIOS = ({ data, defaultValue, onValueChange }: FlatSelector
     <PickerContainer>
       {/* 顶部渐变遮罩 */}
       <GradientOverlay
-        colors={['rgba(255,255,255,0.9)', 'rgba(255,255,255,0.6)', 'transparent']}
-        locations={[0, 0.5, 1]}
+        colors={['rgba(255,255,255,1)', 'rgba(255,255,255,0.8)', 'rgba(255,255,255,0.4)', 'transparent']}
+        locations={[0, 0.3, 0.6, 1]}
         pointerEvents="none"
         top
       >
         <LinearGradient
-          colors={['rgba(255,255,255,0.95)', 'rgba(255,255,255,0.4)', 'transparent']}
-          locations={[0, 0.3, 1]}
+          colors={['rgba(255,255,255,1)', 'rgba(255,255,255,0.7)', 'rgba(255,255,255,0.3)', 'transparent']}
+          locations={[0, 0.4, 0.7, 1]}
           style={{ flex: 1 }}
         />
       </GradientOverlay>
 
       {/* 底部渐变遮罩 */}
       <GradientOverlay
-        colors={['transparent', 'rgba(255,255,255,0.6)', 'rgba(255,255,255,0.9)']}
-        locations={[0, 0.5, 1]}
+        colors={['transparent', 'rgba(255,255,255,0.4)', 'rgba(255,255,255,0.8)', 'rgba(255,255,255,1)']}
+        locations={[0, 0.4, 0.7, 1]}
         pointerEvents="none"
         bottom
       >
         <LinearGradient
-          colors={['transparent', 'rgba(255,255,255,0.4)', 'rgba(255,255,255,0.95)']}
-          locations={[0, 0.7, 1]}
+          colors={['transparent', 'rgba(255,255,255,0.3)', 'rgba(255,255,255,0.7)', 'rgba(255,255,255,1)']}
+          locations={[0, 0.3, 0.6, 1]}
           style={{ flex: 1 }}
         />
       </GradientOverlay>
@@ -126,11 +94,12 @@ const FlatSelectorLikeIOS = ({ data, defaultValue, onValueChange }: FlatSelector
         renderItem={renderItem}
         defaultIndex={defaultIndex >= 0 ? defaultIndex : 0}
         loop={false}
+        pagingEnabled
+        snapEnabled
         style={{
           width: 300,
           height: CONTAINER_HEIGHT,
         }}
-        customAnimation={animationStyle}
         onSnapToItem={(index) => {
           if (index >= 0 && index < data.length) {
             const selectedItem = data[index];
