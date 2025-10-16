@@ -37,34 +37,25 @@ const FlatSelectorLikeIOS = ({ data, defaultValue, onValueChange }: FlatSelector
     (value: number) => {
       'worklet';
 
-      const itemGap = ITEM_HEIGHT;
-      const inputRange = [-2, -1, 0, 1, 2];
-
-      const translateY = interpolate(
-        value,
-        inputRange,
-        inputRange.map((v) => v * itemGap),
-        Extrapolation.CLAMP
-      );
+      const inputRange = [-3, -2, -1, 0, 1, 2, 3];
 
       const scale = interpolate(
         value,
         inputRange,
-        [0.5, 0.7, 1, 0.7, 0.5],
+        [0.4, 0.5, 0.7, 1, 0.7, 0.5, 0.4],
         Extrapolation.CLAMP
       );
 
       const opacity = interpolate(
         value,
         inputRange,
-        [0.2, 0.5, 1, 0.5, 0.2],
+        [0.1, 0.2, 0.5, 1, 0.5, 0.2, 0.1],
         Extrapolation.CLAMP
       );
 
       return {
-        transform: [{ translateY }, { scale }],
+        transform: [{ scale }],
         opacity,
-        zIndex: Math.round((1 - Math.abs(value)) * 1000),
       };
     },
     []
