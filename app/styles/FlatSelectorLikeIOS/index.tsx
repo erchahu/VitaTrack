@@ -26,7 +26,7 @@ interface FlatSelectorLikeIOSProps {
   onValueChange?: (value: string) => void;
 }
 
-const ITEM_HEIGHT = 50;
+const ITEM_HEIGHT = 60;
 const VISIBLE_ITEMS = 7;
 const CONTAINER_HEIGHT = ITEM_HEIGHT * VISIBLE_ITEMS;
 
@@ -41,16 +41,34 @@ const FlatSelectorLikeIOS = ({ data, defaultValue, onValueChange }: FlatSelector
     const animatedStyle = useAnimatedStyle(() => {
       const distance = Math.abs(progressValue.value - index);
 
-      // 中间最大32,向上下逐渐变小到18
+      // 中间最大36,向上下对称渐变到20
       const fontSize = interpolate(
         distance,
         [0, 1, 2, 3],
-        [32, 26, 22, 18],
+        [36, 28, 24, 20],
+        Extrapolation.CLAMP
+      );
+
+      // 中间项不透明度为1(选中),其他渐变到0.5
+      const opacity = interpolate(
+        distance,
+        [0, 1, 2, 3],
+        [1, 0.7, 0.5, 0.4],
         Extrapolation.CLAMP
       );
 
       return {
         fontSize,
+        opacity,
+      };
+    });
+
+    const textColorStyle = useAnimatedStyle(() => {
+      const distance = Math.abs(progressValue.value - index);
+      const isSelected = distance < 0.5;
+
+      return {
+        color: isSelected ? theme.colors.primary : theme.colors.onSurface,
       };
     });
 
@@ -66,10 +84,10 @@ const FlatSelectorLikeIOS = ({ data, defaultValue, onValueChange }: FlatSelector
           style={[
             {
               fontWeight: '600',
-              color: theme.colors.primary,
               textAlign: 'center',
             },
             animatedStyle,
+            textColorStyle,
           ]}
         >
           {item.title}
