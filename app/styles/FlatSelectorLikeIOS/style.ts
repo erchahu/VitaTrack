@@ -2,22 +2,22 @@ import styled from "styled-components/native";
 import LinearGradient from 'react-native-linear-gradient';
 
 export const PickerContainer = styled.View`
-  height: ${50 * 5}px;
+  height: ${50 * 7}px;
   width: 300px;
   align-self: center;
   position: relative;
-  background-color: #fafafa;
+  background-color: ${({ theme }) => theme.colors.background};
   border-radius: 10px;
   overflow: hidden;
   border-width: 1px;
-  border-color: #e0e0e0;
+  border-color: ${({ theme }) => theme.colors.outline};
 `;
 
 export const GradientOverlay = styled(LinearGradient)<{ top?: boolean; bottom?: boolean }>`
   position: absolute;
   left: 0;
   right: 0;
-  height: ${50 * 2}px;
+  height: ${50 * 3}px;
   ${({ top }) => top && `
     top: 0;
   `}

@@ -1,13 +1,19 @@
 import React, { memo, useRef } from "react"
 import { View } from "react-native"
 import Carousel from 'react-native-reanimated-carousel'
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  interpolate,
+  Extrapolation,
+} from 'react-native-reanimated'
 import LinearGradient from 'react-native-linear-gradient'
 import {
   PickerContainer,
   GradientOverlay,
   SelectionIndicator
 } from "./style"
-import { Text } from "react-native-paper";
+import { Text, useTheme } from "react-native-paper";
 
 interface FlatSelectorItem {
   key: string;
@@ -21,15 +27,33 @@ interface FlatSelectorLikeIOSProps {
 }
 
 const ITEM_HEIGHT = 50;
-const VISIBLE_ITEMS = 5;
+const VISIBLE_ITEMS = 7;
 const CONTAINER_HEIGHT = ITEM_HEIGHT * VISIBLE_ITEMS;
 
 const FlatSelectorLikeIOS = ({ data, defaultValue, onValueChange }: FlatSelectorLikeIOSProps) => {
   const carouselRef = useRef<any>(null);
+  const theme = useTheme();
+  const progressValue = useSharedValue(0);
 
   const defaultIndex = data.findIndex(item => item.key === defaultValue);
 
-  const renderItem = ({ item }: { item: FlatSelectorItem }) => {
+  const renderItem = ({ item, index }: { item: FlatSelectorItem; index: number }) => {
+    const animatedStyle = useAnimatedStyle(() => {
+      const distance = Math.abs(progressValue.value - index);
+
+      // 中间最大32,向上下逐渐变小到18
+      const fontSize = interpolate(
+        distance,
+        [0, 1, 2, 3],
+        [32, 26, 22, 18],
+        Extrapolation.CLAMP
+      );
+
+      return {
+        fontSize,
+      };
+    });
+
     return (
       <View
         style={{
@@ -38,16 +62,18 @@ const FlatSelectorLikeIOS = ({ data, defaultValue, onValueChange }: FlatSelector
           alignItems: 'center',
         }}
       >
-        <Text
-          style={{
-            fontSize: 26,
-            fontWeight: '600',
-            color: '#007AFF',
-            textAlign: 'center',
-          }}
+        <Animated.Text
+          style={[
+            {
+              fontWeight: '600',
+              color: theme.colors.primary,
+              textAlign: 'center',
+            },
+            animatedStyle,
+          ]}
         >
           {item.title}
-        </Text>
+        </Animated.Text>
       </View>
     );
   };
@@ -99,6 +125,9 @@ const FlatSelectorLikeIOS = ({ data, defaultValue, onValueChange }: FlatSelector
         style={{
           width: 300,
           height: CONTAINER_HEIGHT,
+        }}
+        onProgressChange={(_, absoluteProgress) => {
+          progressValue.value = absoluteProgress;
         }}
         onSnapToItem={(index) => {
           if (index >= 0 && index < data.length) {
