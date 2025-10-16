@@ -37,6 +37,13 @@ const FlatSelectorLikeIOS = ({ data, defaultValue, onValueChange }: FlatSelector
 
   const defaultIndex = data.findIndex(item => item.key === defaultValue);
 
+  // 设置初始 progressValue 以确保默认选中项居中
+  React.useEffect(() => {
+    if (defaultIndex >= 0) {
+      progressValue.value = defaultIndex;
+    }
+  }, []);
+
   const renderItem = ({ item, index }: { item: FlatSelectorItem; index: number }) => {
     const animatedStyle = useAnimatedStyle(() => {
       const distance = Math.abs(progressValue.value - index);
