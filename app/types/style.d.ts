@@ -248,14 +248,21 @@ export interface ThemeContextType {
 }
 
 // ========== 第三方库类型扩展 ==========
-declare module 'react-native-paper' {
-  // export interface ThemeColors extends ThemeColors {}
+// declare module 'react-native-paper' {
+//   // export interface ThemeColors extends ThemeColors {}
   
-  export interface Theme {
-    colors: ThemeColors;
-  }
-}
+//   export interface Theme {
+//     colors: ThemeColors;
+//   }
+// }
 
-declare module 'styled-components' {
-  export interface DefaultTheme extends AppTheme {}
+// declare module 'styled-components' {
+//   export interface DefaultTheme extends AppTheme {}
+// }
+
+import 'styled-components/native';
+import { MD3Theme } from 'react-native-paper';
+
+declare module 'styled-components/native' {
+  export interface DefaultTheme extends MD3Theme {}
 }

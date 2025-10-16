@@ -1,0 +1,13 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "app/assets/images/files/initial_famale.webp",
+      "sha1": "ab2967ddd97459ca7c349d40c64828c03103d791"
+    },
+    {
+      "path": "app/assets/images/files/initial_male.webp",
+      "sha1": "09a5f2c15460706fdaeadac35c4388bfbb2a95ef"
+    }
+  ]
+}
