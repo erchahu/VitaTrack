@@ -1,11 +1,9 @@
 import React, { memo, useRef } from "react"
 import { View } from "react-native"
 import Carousel from 'react-native-reanimated-carousel'
-import Animated, {
+import {
   Extrapolation,
   interpolate,
-  useAnimatedStyle,
-  useSharedValue,
 } from 'react-native-reanimated'
 import LinearGradient from 'react-native-linear-gradient'
 import {
@@ -32,42 +30,47 @@ const CONTAINER_HEIGHT = ITEM_HEIGHT * VISIBLE_ITEMS;
 
 const FlatSelectorLikeIOS = ({ data, defaultValue, onValueChange }: FlatSelectorLikeIOSProps) => {
   const carouselRef = useRef<any>(null);
-  const progressValue = useSharedValue(0);
 
   const defaultIndex = data.findIndex(item => item.key === defaultValue);
 
-  const renderItem = ({ item, index }: { item: FlatSelectorItem; index: number }) => {
-    const animatedStyle = useAnimatedStyle(() => {
-      const inputRange = [
-        index - 2,
-        index - 1,
-        index,
-        index + 1,
-        index + 2,
-      ];
+  const animationStyle = React.useCallback(
+    (value: number) => {
+      'worklet';
 
-      // 中间项为1，向上下逐渐变小
+      const itemGap = ITEM_HEIGHT;
+      const inputRange = [-2, -1, 0, 1, 2];
+
+      const translateY = interpolate(
+        value,
+        inputRange,
+        inputRange.map((v) => v * itemGap),
+        Extrapolation.CLAMP
+      );
+
       const scale = interpolate(
-        progressValue.value,
+        value,
         inputRange,
         [0.5, 0.7, 1, 0.7, 0.5],
         Extrapolation.CLAMP
       );
 
-      // 中间项完全不透明，向上下逐渐透明
       const opacity = interpolate(
-        progressValue.value,
+        value,
         inputRange,
         [0.2, 0.5, 1, 0.5, 0.2],
         Extrapolation.CLAMP
       );
 
       return {
-        transform: [{ scale }],
+        transform: [{ translateY }, { scale }],
         opacity,
+        zIndex: Math.round((1 - Math.abs(value)) * 1000),
       };
-    });
+    },
+    []
+  );
 
+  const renderItem = ({ item }: { item: FlatSelectorItem }) => {
     return (
       <View
         style={{
@@ -76,18 +79,16 @@ const FlatSelectorLikeIOS = ({ data, defaultValue, onValueChange }: FlatSelector
           alignItems: 'center',
         }}
       >
-        <Animated.View style={animatedStyle}>
-          <Text
-            style={{
-              fontSize: 26,
-              fontWeight: '600',
-              color: '#007AFF',
-              textAlign: 'center',
-            }}
-          >
-            {item.title}
-          </Text>
-        </Animated.View>
+        <Text
+          style={{
+            fontSize: 26,
+            fontWeight: '600',
+            color: '#007AFF',
+            textAlign: 'center',
+          }}
+        >
+          {item.title}
+        </Text>
       </View>
     );
   };
@@ -128,7 +129,7 @@ const FlatSelectorLikeIOS = ({ data, defaultValue, onValueChange }: FlatSelector
       <Carousel
         ref={carouselRef}
         width={300}
-        height={CONTAINER_HEIGHT}
+        height={ITEM_HEIGHT}
         vertical
         data={data}
         renderItem={renderItem}
@@ -138,9 +139,7 @@ const FlatSelectorLikeIOS = ({ data, defaultValue, onValueChange }: FlatSelector
           width: 300,
           height: CONTAINER_HEIGHT,
         }}
-        onProgressChange={(_, absoluteProgress) => {
-          progressValue.value = absoluteProgress;
-        }}
+        customAnimation={animationStyle}
         onSnapToItem={(index) => {
           if (index >= 0 && index < data.length) {
             const selectedItem = data[index];
