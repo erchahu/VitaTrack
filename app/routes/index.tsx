@@ -6,50 +6,48 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import InitialScreen from '@screens/InitialScreen';
 import HomeScreen from '@/screens/HomeScreen';
 import ProfileScreen from '@/screens/ProfileScreen';
+import './types'; // 导入类型定义以激活全局类型声明
 
-const TabNavigator = () => {
-  const theme = useTheme();
-  
-  const Tab = createBottomTabNavigator({
-    screens: {
-      home: {
-        screen: HomeScreen,
-        options: {
-          title: 'Home',
-          tabBarIcon: ({ focused, color, size }) => (
-            <Icon 
-              source={focused ? 'home' : 'home-outline'} 
-              size={size} 
-              color={color} 
-            />
-          ),
-        },
-      },
-      profile: {
-        screen: ProfileScreen,
-        options: {
-          title: 'Profile',
-          tabBarIcon: ({ focused, color, size }) => (
-            <Icon 
-              source={focused ? 'account' : 'account-outline'} 
-              size={size} 
-              color={color} 
-            />
-          ),
-        },
-      },
-    },
-    options: {
-      tabBarActiveTintColor: theme.colors.primary, // 使用主题主色
-      tabBarInactiveTintColor: theme.colors.onSurfaceVariant, // 使用主题表面变体色
+const TabNavigator = createBottomTabNavigator({
+  screenOptions: () => {
+    const theme = useTheme();
+    return {
+      tabBarActiveTintColor: theme.colors.primary,
+      tabBarInactiveTintColor: theme.colors.onSurfaceVariant,
       tabBarStyle: {
-        backgroundColor: theme.colors.surface, // 使用主题表面色
+        backgroundColor: theme.colors.surface,
+      },
+    };
+  },
+  screens: {
+    home: {
+      screen: HomeScreen,
+      options: {
+        title: 'Home',
+        tabBarIcon: ({ focused, color, size }) => (
+          <Icon
+            source={focused ? 'home' : 'home-outline'}
+            size={size}
+            color={color}
+          />
+        ),
       },
     },
-  });
-
-  return <Tab />;
-};
+    profile: {
+      screen: ProfileScreen,
+      options: {
+        title: 'Profile',
+        tabBarIcon: ({ focused, color, size }) => (
+          <Icon
+            source={focused ? 'account' : 'account-outline'}
+            size={size}
+            color={color}
+          />
+        ),
+      },
+    },
+  },
+});
 
 // 创建根导航器
 const RootStack = createNativeStackNavigator({
