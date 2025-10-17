@@ -1,8 +1,11 @@
-import { memo } from "react"
-import { Text } from "react-native-paper"
+import { memo } from 'react';
+import { Text } from 'react-native-paper';
+import { useTranslation } from 'react-i18next';
 
 const ProfileScreen = () => {
-  return <Text>Profile</Text>
-}
+  const { t } = useTranslation();
 
-export default memo(ProfileScreen)
+  return <Text>{t('profile.title')}</Text>;
+};
+
+export default memo(ProfileScreen);

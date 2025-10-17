@@ -1,8 +1,11 @@
-import { memo } from "react"
-import { Text } from "react-native-paper"
+import { memo } from 'react';
+import { Text } from 'react-native-paper';
+import { useTranslation } from 'react-i18next';
 
 const HomeScreen = () => {
-  return <Text>Home</Text>
-}
+  const { t } = useTranslation();
 
-export default memo(HomeScreen)
+  return <Text>{t('home.title')}</Text>;
+};
+
+export default memo(HomeScreen);
