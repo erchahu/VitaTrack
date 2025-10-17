@@ -1,4 +1,4 @@
-import { SemanticColors } from '../../types/style';
+import { SemanticColors } from '@types/style';
 import { BASE_COLORS } from './baseColors';
 
 export const SEMANTIC_COLORS: SemanticColors = {

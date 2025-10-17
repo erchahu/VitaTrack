@@ -9,7 +9,7 @@ import {
   SafeAreaProvider,
 } from 'react-native-safe-area-context';
 import { DefaultTheme, PaperProvider, useTheme } from 'react-native-paper';
-import Routes from './routes';
+import Routes from '@routes';
 import { ThemeProvider } from 'styled-components/native';
 
 function App() {
