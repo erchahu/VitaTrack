@@ -34,7 +34,7 @@ const InitailAge = () => {
       <AgeInputWrapper>
         <TextInput
           mode="outlined"
-          label="年龄"
+          label="Age"
           value={age}
           onChangeText={handleAgeChange}
           keyboardType="numeric"
