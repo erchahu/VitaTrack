@@ -1,49 +1,73 @@
-import React, { useState } from 'react';
-import { BottomNavigation, Text } from 'react-native-paper';
-
-const MusicRoute = () => <Text>12345678</Text>;
-
-const AlbumsRoute = () => <Text>Albums</Text>;
-
-// const Routes = () => {
-//   const [index, setIndex] = useState(0);
-//   const [routes] = useState([
-//     { key: 'sports', title: 'Sports', focusedIcon: 'handball' },
-//     { key: 'profile', title: 'Profile', focusedIcon: 'account' },
-//   ]);
-
-//   const renderScene = BottomNavigation.SceneMap({
-//     sports: MusicRoute,
-//     profile: AlbumsRoute,
-//   });
-
-//   return (
-//     <BottomNavigation
-//       navigationState={{ index, routes }}
-//       onIndexChange={setIndex}
-//       renderScene={renderScene}
-//     />
-//   );
-// };
-
+import React from 'react';
+import { Icon, useTheme } from 'react-native-paper';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createStaticNavigation } from '@react-navigation/native';
-import Initial from '@screens/Initial';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import InitialScreen from '@screens/InitialScreen';
+import HomeScreen from '@/screens/HomeScreen';
+import ProfileScreen from '@/screens/ProfileScreen';
+import './types'; // 导入类型定义以激活全局类型声明
 
-const routes = createNativeStackNavigator({
-  initialRouteName: 'Initial',
+const TabNavigator = createBottomTabNavigator({
+  screenOptions: () => {
+    const theme = useTheme();
+    return {
+      tabBarActiveTintColor: theme.colors.primary,
+      tabBarInactiveTintColor: theme.colors.onSurfaceVariant,
+      tabBarStyle: {
+        backgroundColor: theme.colors.surface,
+      },
+    };
+  },
   screens: {
-    Initial: {
-      screen: Initial,
+    home: {
+      screen: HomeScreen,
       options: {
-        headerShown: false
-      }
+        title: 'Home',
+        tabBarIcon: ({ focused, color, size }) => (
+          <Icon
+            source={focused ? 'home' : 'home-outline'}
+            size={size}
+            color={color}
+          />
+        ),
+      },
     },
-    Home: MusicRoute,
-    Profile: AlbumsRoute,
+    profile: {
+      screen: ProfileScreen,
+      options: {
+        title: 'Profile',
+        tabBarIcon: ({ focused, color, size }) => (
+          <Icon
+            source={focused ? 'account' : 'account-outline'}
+            size={size}
+            color={color}
+          />
+        ),
+      },
+    },
   },
 });
 
-const Routes = createStaticNavigation(routes);
+// 创建根导航器
+const RootStack = createNativeStackNavigator({
+  initialRouteName: 'initial',
+  screens: {
+    initial: {
+      screen: InitialScreen,
+      options: {
+        headerShown: false,
+      },
+    },
+    mainTabs: {
+      screen: TabNavigator,
+      options: {
+        headerShown: false,
+      },
+    },
+  },
+});
 
-export default Routes;
+const Navigation = createStaticNavigation(RootStack);
+
+export default Navigation;
