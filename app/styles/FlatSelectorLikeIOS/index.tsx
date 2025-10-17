@@ -1,13 +1,19 @@
-import React, { memo, useState, useRef } from "react"
-import { FlatList } from "react-native"
+import React, { memo, useRef } from "react"
+import { View } from "react-native"
+import Carousel from 'react-native-reanimated-carousel'
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  interpolate,
+  Extrapolation,
+} from 'react-native-reanimated'
 import LinearGradient from 'react-native-linear-gradient'
-import { 
-  PickerContainer, 
-  RowText, 
+import {
+  PickerContainer,
   GradientOverlay,
-  SelectionIndicator 
+  SelectionIndicator
 } from "./style"
-import { Text } from "react-native-paper";
+import { Text, useTheme } from "react-native-paper";
 
 interface FlatSelectorItem {
   key: string;
@@ -20,101 +26,151 @@ interface FlatSelectorLikeIOSProps {
   onValueChange?: (value: string) => void;
 }
 
-const ITEM_HEIGHT = 32;
-const VISIBLE_ITEMS = 5;
+const ITEM_HEIGHT = 60;
+const VISIBLE_ITEMS = 7;
 const CONTAINER_HEIGHT = ITEM_HEIGHT * VISIBLE_ITEMS;
 
 const FlatSelectorLikeIOS = ({ data, defaultValue, onValueChange }: FlatSelectorLikeIOSProps) => {
-  const [selectedValue, setSelectedValue] = useState(defaultValue);
-  const flatListRef = useRef<FlatList>(null);
+  const carouselRef = useRef<any>(null);
+  const theme = useTheme();
+  const progressValue = useSharedValue(0);
 
-  const handleScroll = (event: any) => {
-    const y = event.nativeEvent.contentOffset.y;
-    const index = Math.round(y / ITEM_HEIGHT);
-    if (index >= 0 && index < data.length) {
-      const selectedItem = data[index];
-      setSelectedValue(selectedItem.key);
-      onValueChange?.(selectedItem.key);
+  const defaultIndex = data.findIndex(item => item.key === defaultValue);
+
+  // 添加空白项以实现居中效果
+  const PADDING_COUNT = Math.floor(VISIBLE_ITEMS / 2); // 3个空白项
+  const paddedData = [
+    ...Array(PADDING_COUNT).fill({ key: 'padding-top', title: '' }),
+    ...data,
+    ...Array(PADDING_COUNT).fill({ key: 'padding-bottom', title: '' }),
+  ];
+  const adjustedDefaultIndex = defaultIndex + PADDING_COUNT;
+
+  // 设置初始 progressValue 以确保默认选中项居中
+  React.useEffect(() => {
+    if (adjustedDefaultIndex >= 0) {
+      progressValue.value = adjustedDefaultIndex;
     }
-  };
+  }, []);
 
-  const scrollToIndex = (index: number) => {
-    flatListRef.current?.scrollToIndex({
-      index,
-      animated: true,
-      viewPosition: 0.5
+  const renderItem = ({ item, index }: { item: FlatSelectorItem; index: number }) => {
+    const animatedStyle = useAnimatedStyle(() => {
+      const distance = Math.abs(progressValue.value - index);
+
+      // 中间最大36,向上下对称渐变到20
+      const fontSize = interpolate(
+        distance,
+        [0, 1, 2, 3],
+        [36, 28, 24, 20],
+        Extrapolation.CLAMP
+      );
+
+      // 中间项不透明度为1(选中),其他渐变到0.5
+      const opacity = interpolate(
+        distance,
+        [0, 1, 2, 3],
+        [1, 0.7, 0.5, 0.4],
+        Extrapolation.CLAMP
+      );
+
+      return {
+        fontSize,
+        opacity,
+      };
     });
+
+    const textColorStyle = useAnimatedStyle(() => {
+      const distance = Math.abs(progressValue.value - index);
+      const isSelected = distance < 0.5;
+
+      return {
+        color: isSelected ? theme.colors.primary : theme.colors.onSurface,
+      };
+    });
+
+    return (
+      <View
+        style={{
+          height: ITEM_HEIGHT,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <Animated.Text
+          style={[
+            {
+              fontWeight: '600',
+              textAlign: 'center',
+            },
+            animatedStyle,
+            textColorStyle,
+          ]}
+        >
+          {item.title}
+        </Animated.Text>
+      </View>
+    );
   };
 
   return (
     <PickerContainer>
       {/* 顶部渐变遮罩 */}
       <GradientOverlay
-        colors={['rgba(255,255,255,0.9)', 'rgba(255,255,255,0.6)', 'transparent']}
-        locations={[0, 0.5, 1]}
+        colors={['rgba(255,255,255,1)', 'rgba(255,255,255,0.8)', 'rgba(255,255,255,0.4)', 'transparent']}
+        locations={[0, 0.3, 0.6, 1]}
         pointerEvents="none"
         top
       >
         <LinearGradient
-          colors={['rgba(255,255,255,0.95)', 'rgba(255,255,255,0.4)', 'transparent']}
-          locations={[0, 0.3, 1]}
+          colors={['rgba(255,255,255,1)', 'rgba(255,255,255,0.7)', 'rgba(255,255,255,0.3)', 'transparent']}
+          locations={[0, 0.4, 0.7, 1]}
           style={{ flex: 1 }}
         />
       </GradientOverlay>
 
       {/* 底部渐变遮罩 */}
       <GradientOverlay
-        colors={['transparent', 'rgba(255,255,255,0.6)', 'rgba(255,255,255,0.9)']}
-        locations={[0, 0.5, 1]}
+        colors={['transparent', 'rgba(255,255,255,0.4)', 'rgba(255,255,255,0.8)', 'rgba(255,255,255,1)']}
+        locations={[0, 0.4, 0.7, 1]}
         pointerEvents="none"
         bottom
       >
         <LinearGradient
-          colors={['transparent', 'rgba(255,255,255,0.4)', 'rgba(255,255,255,0.95)']}
-          locations={[0, 0.7, 1]}
+          colors={['transparent', 'rgba(255,255,255,0.3)', 'rgba(255,255,255,0.7)', 'rgba(255,255,255,1)']}
+          locations={[0, 0.3, 0.6, 1]}
           style={{ flex: 1 }}
         />
       </GradientOverlay>
 
       {/* 选中指示器 */}
       <SelectionIndicator />
-      
-      <FlatList
-        ref={flatListRef}
-        data={data}
-        keyExtractor={(item) => item.key}
-        showsVerticalScrollIndicator={false}
-        snapToInterval={ITEM_HEIGHT}
-        decelerationRate="fast"
-        onMomentumScrollEnd={handleScroll}
-        onScrollEndDrag={handleScroll}
-        style={{ height: CONTAINER_HEIGHT }}
-        contentContainerStyle={{
-          paddingVertical: ITEM_HEIGHT * 2,
+
+      <Carousel
+        ref={carouselRef}
+        width={300}
+        height={ITEM_HEIGHT}
+        vertical
+        data={paddedData}
+        renderItem={renderItem}
+        defaultIndex={adjustedDefaultIndex >= 0 ? adjustedDefaultIndex : PADDING_COUNT}
+        loop={false}
+        pagingEnabled
+        snapEnabled
+        style={{
+          width: 300,
+          height: CONTAINER_HEIGHT,
         }}
-        getItemLayout={(data, index) => ({
-          length: ITEM_HEIGHT,
-          offset: ITEM_HEIGHT * index,
-          index,
-        })}
-        renderItem={({ item, index }) => (
-          <RowText 
-            height={ITEM_HEIGHT}
-            onPress={() => scrollToIndex(index)}
-          >
-            <Text 
-              style={{ 
-                fontSize: item.key === selectedValue ? 26 : 16,
-                fontWeight: item.key === selectedValue ? '600' : '400',
-                color: item.key === selectedValue ? '#007AFF' : '#8E8E93',
-                textAlign: 'center',
-              }}
-            >
-              {item.title}
-            </Text>
-          </RowText>
-        )}
-        initialScrollIndex={data.findIndex(item => item.key === defaultValue)}
+        onProgressChange={(_, absoluteProgress) => {
+          progressValue.value = absoluteProgress;
+        }}
+        onSnapToItem={(index) => {
+          // 调整索引,排除 padding 项
+          const actualIndex = index - PADDING_COUNT;
+          if (actualIndex >= 0 && actualIndex < data.length) {
+            const selectedItem = data[actualIndex];
+            onValueChange?.(selectedItem.key);
+          }
+        }}
       />
     </PickerContainer>
   )
