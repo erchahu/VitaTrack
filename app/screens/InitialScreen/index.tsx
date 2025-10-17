@@ -6,14 +6,16 @@ import InitailGoal from "./components/InitailGoal";
 import { View } from "react-native";
 import InitailSex from "./components/InitailSex";
 import InitailAge from "./components/InitailAge";
+import { useNavigation } from "@react-navigation/native";
 
 interface InitialData {
   goal?: number;
   sex?: number;
 }
 
-const Initial = () => {
+const InitialScreen = () => {
 
+  const navigation = useNavigation()
   const theme = useTheme();
   const [currentIndex, setCurrentIndex] = useState<number>(0)
   const [data, setData] = useState<InitialData>()
@@ -31,7 +33,9 @@ const Initial = () => {
   }, [currentIndex, setCurrentIndex])
 
   const handleNext = useCallback(() => {
-    if (currentIndex === infoArray.length - 1) return;
+    if (currentIndex === infoArray.length - 1) {
+      return navigation.navigate('mainTabs')
+    }
 
     // if (currentIndex === 0 && data?.goal === undefined) return;
     setCurrentIndex(currentIndex + 1)
@@ -73,4 +77,4 @@ const Initial = () => {
   )
 }
 
-export default memo(Initial);
+export default memo(InitialScreen);
