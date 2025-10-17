@@ -1,4 +1,4 @@
-import { BaseColors } from "../../types/style";
+import { BaseColors } from "@types/style";
 
 export const BASE_COLORS: BaseColors = {
   // 蓝色系

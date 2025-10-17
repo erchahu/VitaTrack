@@ -28,7 +28,7 @@ const AlbumsRoute = () => <Text>Albums</Text>;
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createStaticNavigation } from '@react-navigation/native';
-import Initial from '../screens/Initial';
+import Initial from '@screens/Initial';
 
 const routes = createNativeStackNavigator({
   initialRouteName: 'Initial',

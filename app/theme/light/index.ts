@@ -1,6 +1,6 @@
-import { ThemeColors } from '../../types/style';
-import { BASE_COLORS } from '../constants/baseColors';
-import { SEMANTIC_COLORS } from '../constants/semanticColors';
+import { ThemeColors } from '@types/style';
+import { BASE_COLORS } from '@theme/constants/baseColors';
+import { SEMANTIC_COLORS } from '@theme/constants/semanticColors';
 
 export const LIGHT_COLORS: ThemeColors = {
   // 主色调
