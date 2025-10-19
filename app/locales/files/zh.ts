@@ -19,5 +19,7 @@ export default {
   profile: {
     title: '个人',
     settings: '设置',
+    changeLanguage: '切换语言',
+    selectLanguage: '选择语言',
   },
 };
