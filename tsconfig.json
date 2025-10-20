@@ -8,9 +8,14 @@
       "@images/*": ["app/assets/images/*"],
       "@components/*": ["app/styles/*"],
       "@screens/*": ["app/screens/*"],
+      "@routes": ["app/routes"],
       "@routes/*": ["app/routes/*"],
       "@theme/*": ["app/theme/*"],
-      "@types/*": ["app/types/*"]
+      "@types/*": ["app/types/*"],
+      "@devtools/*": ["app/devtools/*"],
+      "@stores/*": ["app/stores/*"],
+      "@locales": ["app/locales"],
+      "@locales/*": ["app/locales/*"],
     }
   },
   "include": ["**/*.ts", "**/*.tsx"],
