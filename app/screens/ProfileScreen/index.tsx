@@ -1,7 +1,7 @@
 import { memo, useState, useCallback } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Text, Button, Dialog, Portal, RadioButton } from 'react-native-paper';
+import { Button, Dialog, Portal, RadioButton } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
+import { ChangeBtn, Container, ContainerTitle } from './style';
 
 const ProfileScreen = () => {
   const { t, i18n } = useTranslation();
@@ -21,14 +21,14 @@ const ProfileScreen = () => {
   }, [selectedLanguage, i18n, hideDialog]);
 
   return (
-    <View style={styles.container}>
-      <Text variant="headlineMedium" style={styles.title}>
+    <Container>
+      <ContainerTitle variant="headlineMedium">
         {t('profile.title')}
-      </Text>
+      </ContainerTitle>
 
-      <Button mode="contained" onPress={showDialog} style={styles.button}>
+      <ChangeBtn mode="contained" onPress={showDialog}>
         {t('profile.changeLanguage')}
-      </Button>
+      </ChangeBtn>
 
       <Portal>
         <Dialog visible={visible} onDismiss={hideDialog}>
@@ -48,21 +48,8 @@ const ProfileScreen = () => {
           </Dialog.Actions>
         </Dialog>
       </Portal>
-    </View>
+    </Container>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
-  },
-  title: {
-    marginBottom: 24,
-  },
-  button: {
-    marginTop: 16,
-  },
-});
 
 export default memo(ProfileScreen);
