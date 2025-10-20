@@ -11,6 +11,7 @@ import {
 import { DefaultTheme, PaperProvider, useTheme } from 'react-native-paper';
 import Routes from '@routes';
 import { ThemeProvider } from 'styled-components/native';
+import '@locales';
 
 function App() {
   // const isDarkMode = useColorScheme() === 'dark';

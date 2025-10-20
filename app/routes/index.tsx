@@ -3,6 +3,7 @@ import { Icon, useTheme } from 'react-native-paper';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createStaticNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useTranslation } from 'react-i18next';
 import InitialScreen from '@screens/InitialScreen';
 import HomeScreen from '@/screens/HomeScreen';
 import ProfileScreen from '@/screens/ProfileScreen';
@@ -22,28 +23,34 @@ const TabNavigator = createBottomTabNavigator({
   screens: {
     home: {
       screen: HomeScreen,
-      options: {
-        title: 'Home',
-        tabBarIcon: ({ focused, color, size }) => (
-          <Icon
-            source={focused ? 'home' : 'home-outline'}
-            size={size}
-            color={color}
-          />
-        ),
+      options: () => {
+        const { t } = useTranslation();
+        return {
+          title: t('common.home'),
+          tabBarIcon: ({ focused, color, size }: { focused: boolean; color: string; size: number }) => (
+            <Icon
+              source={focused ? 'home' : 'home-outline'}
+              size={size}
+              color={color}
+            />
+          ),
+        };
       },
     },
     profile: {
       screen: ProfileScreen,
-      options: {
-        title: 'Profile',
-        tabBarIcon: ({ focused, color, size }) => (
-          <Icon
-            source={focused ? 'account' : 'account-outline'}
-            size={size}
-            color={color}
-          />
-        ),
+      options: () => {
+        const { t } = useTranslation();
+        return {
+          title: t('common.profile'),
+          tabBarIcon: ({ focused, color, size }: { focused: boolean; color: string; size: number }) => (
+            <Icon
+              source={focused ? 'account' : 'account-outline'}
+              size={size}
+              color={color}
+            />
+          ),
+        };
       },
     },
   },
