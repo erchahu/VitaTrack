@@ -2,6 +2,10 @@
   "migIndex": 1,
   "data": [
     {
+      "path": "app/assets/images/files/home_page.webp",
+      "sha1": "846897f770455b96c6e46cf2f06f2e437c2ad0d0"
+    },
+    {
       "path": "app/assets/images/files/initial_famale.webp",
       "sha1": "ab2967ddd97459ca7c349d40c64828c03103d791"
     },

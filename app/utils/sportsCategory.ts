@@ -90,7 +90,10 @@ export const FITNESS_SPORTS = {
 } as const;
 
 export type SportCategoryKey = keyof typeof FITNESS_SPORTS;
-export type SportKey = typeof FITNESS_SPORTS[SportCategoryKey]['sports'][number];
+// export type SportKey = typeof FITNESS_SPORTS[SportCategoryKey]['sports'][number];
+export type SportKey = {
+  [K in SportCategoryKey]: (typeof FITNESS_SPORTS)[K]['sports'][number];
+}[SportCategoryKey];
 
 export type SportCategory = {
   icon: string;

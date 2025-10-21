@@ -1,3 +1,5 @@
+import sports from './sports/en'
+
 export default {
   common: {
     welcome: 'Welcome',
@@ -13,13 +15,26 @@ export default {
     description: 'Your personal health tracking companion',
   },
   home: {
-    title: 'Home',
-    greeting: 'Hello',
-  },
+    sportTime: 'Exercise duration',
+    sportTimeTarget: '/{{ time }} minutes',
+    steps: 'Number of steps',
+    stepsTarget: '/{{ time }} steps',
+    calories: 'Calorie',
+    caloriesTarget: '/{{ time }} kcal',
+    drink: 'Drinking water',
+    drinkCurrent: '/{{ time }} (cups)',
+    sleep: 'Sleep',
+    sportHistory: 'Exercise history',
+    menstruation: 'Menstrual period',
+    weight: 'Weight',
+    height: 'Height',
+    mood: 'Mood'
+    },
   profile: {
     title: 'Profile',
     settings: 'Settings',
     changeLanguage: 'Change Language',
     selectLanguage: 'Select Language',
   },
+  sports
 };
