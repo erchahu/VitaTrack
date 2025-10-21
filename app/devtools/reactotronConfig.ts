@@ -1,6 +1,6 @@
 import Reactotron from "reactotron-react-native"
 import reactotronZustand from 'reactotron-plugin-zustand';
-import { useSportHistoryStore } from "@/stores";
+import { useSportHistoryStore } from "@/stores/useSportHistoryStore";
 
 Reactotron.configure({
   name: 'VitaTrack'
