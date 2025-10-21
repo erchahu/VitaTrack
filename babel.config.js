@@ -17,6 +17,7 @@ module.exports = {
           '@devtools': './app/devtools',
           '@stores': './app/stores',
           '@locales': './app/locales',
+          '@utils': './app/utils',
         },
       },
     ],

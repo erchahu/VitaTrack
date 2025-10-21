@@ -16,6 +16,7 @@
       "@stores/*": ["app/stores/*"],
       "@locales": ["app/locales"],
       "@locales/*": ["app/locales/*"],
+      "@utils/*": ["app/utils/*"],
     }
   },
   "include": ["**/*.ts", "**/*.tsx"],
