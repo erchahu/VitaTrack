@@ -34,6 +34,7 @@ const TabNavigator = createBottomTabNavigator({
               color={color}
             />
           ),
+          headerShown: false
         };
       },
     },
@@ -50,6 +51,7 @@ const TabNavigator = createBottomTabNavigator({
               color={color}
             />
           ),
+          headerShown: false
         };
       },
     },
