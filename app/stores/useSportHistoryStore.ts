@@ -1,7 +1,8 @@
-import { SportCategoryKey } from '@/types/vitaTrack';
+import { SportCategoryKey } from 'vitaTrack';
 import { FITNESS_SPORTS } from '@/utils/sportsCategory';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
+import { getStorageItem, setStorageItem } from '@/utils/storage';
 
 type SportHistoryItem = {
   [K in SportCategoryKey]: {
@@ -17,6 +18,7 @@ type SportHistoryItem = {
 
 
 interface SportsStore {
+  initLoading: boolean;
   sportHistory: SportHistoryItem[];
   addSportRecord: (item: SportHistoryItem) => void;
     updateSportRecord: (
@@ -27,6 +29,7 @@ interface SportsStore {
   clearSportHistory: () => void;
   getSportHistoryByCategory: (category: string) => SportHistoryItem[];
   getTotalDuration: () => number;
+  initSportRecord: () => void;
 }
 
 const initHistory: SportsStore['sportHistory'] = [
@@ -48,11 +51,20 @@ export const useSportHistoryStore = create<SportsStore>()(
     (set, get) => ({
       sportHistory: [],
 
+      initSportRecord: () => {
+        const result = getStorageItem('sportHistory')
+        console.log(result, 'sera')
+      },
+
       // 添加运动记录
-      addSportRecord: item =>
-        set(state => ({
-          sportHistory: [...state.sportHistory, item],
-        })),
+      addSportRecord: item => {
+        set(state => {
+          const history = [...state.sportHistory, item];
+          setStorageItem('sportHistory', JSON.stringify(history))
+          return { sportHistory: history }
+        })
+
+      },
 
       // 更新运动记录
       updateSportRecord: (id, updates) =>
