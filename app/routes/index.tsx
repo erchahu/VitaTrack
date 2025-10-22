@@ -4,10 +4,12 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createStaticNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useTranslation } from 'react-i18next';
-import InitialScreen from '@screens/InitialScreen';
-import HomeScreen from '@/screens/HomeScreen';
-import ProfileScreen from '@/screens/ProfileScreen';
-import SportsScreen from '@/screens/SportsScreen';
+import {
+  InitialScreen,
+  HomeScreen,
+  ProfileScreen,
+  SportsScreen,
+} from '@/screens';
 import './types'; // 导入类型定义以激活全局类型声明
 
 const TabNavigator = createBottomTabNavigator({

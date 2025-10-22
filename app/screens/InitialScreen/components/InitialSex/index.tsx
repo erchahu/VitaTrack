@@ -12,11 +12,11 @@ interface SexItemProps {
   icon: ImageType;
 }
 
-const InitailSex = () => {
+const InitialSex = () => {
   // 现在类型推断会更准确
   const sexs: RadioItemProps<SexItemProps>[] = [
     { key: '0', title: 'Male', icon: 'initial_male' },
-    { key: '1', title: 'Female', icon: 'initial_famale' },
+    { key: '1', title: 'Female', icon: 'initial_female' },
   ];
 
   const handleSexChange = (value: string) => {
@@ -36,4 +36,4 @@ const InitailSex = () => {
   );
 };
 
-export default memo(InitailSex);
+export default memo(InitialSex);

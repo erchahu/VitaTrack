@@ -1,8 +1,7 @@
 import { SportCategoryKey } from 'vitaTrack';
-import { FITNESS_SPORTS } from '@/utils/sportsCategory';
+import { FITNESS_SPORTS, getStorageItem, setStorageItem } from '@/utils';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
-import { getStorageItem, setStorageItem } from '@/utils/storage';
 
 type SportHistoryItem = {
   [K in SportCategoryKey]: {

@@ -1,5 +1,5 @@
 import { JSX, memo, ReactNode, useCallback, useState } from 'react';
-import { RadioItem, RowContainer } from './sytle';
+import { RadioItem, RowContainer } from './style';
 
 // 基础接口，包含必需的属性
 interface BaseRadioItem {
