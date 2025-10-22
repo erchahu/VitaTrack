@@ -5,16 +5,19 @@ export default {
     welcome: '欢迎',
     home: '首页',
     profile: '个人',
+    sports: '运动',
     next: '下一步',
     back: '返回',
     confirm: '确认',
     cancel: '取消',
+    records: '条记录'
   },
   onboarding: {
     title: '欢迎使用 VitaTrack',
     description: '您的个人健康追踪助手',
   },
   home: {
+    title: '首页',
     sportTime: '运动时长',
     sportTimeTarget: '/{{ time }}分钟',
     steps: '步数',
@@ -22,13 +25,28 @@ export default {
     calories: '卡路里',
     caloriesTarget: '/{{ time }}千卡',
     drink: '饮水',
-    drinkCurrent: '/{{ time }}（杯）',
+    drinkCurrent: ' {{ time }}（杯）',
     sleep: '睡眠',
+    sleepStart: '健康睡眠, 从我开始',
+    sleepStartText: '开始记录睡眠',
+    sleepSubtitle: '{{hours}}小时{{minutes}}分钟',
     sportHistory: '运动记录',
+    sportHistoryStartText: '开始记录运动',
+    sportHistorySubtitle: '{{count}}次运动',
     menstruation: '经期',
+    menstruationStartText: '开始记录经期',
+    menstruationSubtitle: '周期第{{day}}天',
     weight: '体重',
+    weightStartText: '开始记录体重',
+    weightSubtitle: '{{weight}}kg',
     height: '身高',
-    mood: '情绪'
+    heightStartText: '开始记录身高',
+    heightSubtitle: '{{height}}cm',
+    mood: '情绪',
+    moodStartText: '开始记录情绪',
+    moodSubtitle: '{{mood}}',
+    sportsNone: '近7日没有运动记录哦~',
+    sportsNoneStart: '快点开始运动吧'
   },
   profile: {
     title: '个人',
@@ -37,5 +55,4 @@ export default {
     selectLanguage: '选择语言',
   },
   sports,
-
 };

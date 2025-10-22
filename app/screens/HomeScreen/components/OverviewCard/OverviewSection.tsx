@@ -12,7 +12,7 @@ interface OverviewSectionProps {
   onPress?: () => void;
 }
 
-const OverviewSection: React.FC<OverviewSectionProps> = ({
+const OverviewSection = ({
   icon,
   iconColor,
   title,
@@ -20,7 +20,7 @@ const OverviewSection: React.FC<OverviewSectionProps> = ({
   targetText,
   withBorder = false,
   onPress,
-}) => {
+}: OverviewSectionProps) => {
   const theme = useTheme();
 
   return (

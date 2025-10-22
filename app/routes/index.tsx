@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import InitialScreen from '@screens/InitialScreen';
 import HomeScreen from '@/screens/HomeScreen';
 import ProfileScreen from '@/screens/ProfileScreen';
+import SportsScreen from '@/screens/SportsScreen';
 import './types'; // 导入类型定义以激活全局类型声明
 
 const TabNavigator = createBottomTabNavigator({
@@ -27,9 +28,26 @@ const TabNavigator = createBottomTabNavigator({
         const { t } = useTranslation();
         return {
           title: t('common.home'),
-          tabBarIcon: ({ focused, color, size }: { focused: boolean; color: string; size: number }) => (
+          tabBarIcon: ({ focused, color, size }) => (
             <Icon
               source={focused ? 'home' : 'home-outline'}
+              size={size}
+              color={color}
+            />
+          ),
+          headerShown: false
+        };
+      },
+    },
+    sports: {
+      screen: SportsScreen,
+      options: () => {
+        const { t } = useTranslation();
+        return {
+          title: t('common.sports'),
+          tabBarIcon: ({ color, size }) => (
+            <Icon
+              source={'run'}
               size={size}
               color={color}
             />
@@ -44,7 +62,7 @@ const TabNavigator = createBottomTabNavigator({
         const { t } = useTranslation();
         return {
           title: t('common.profile'),
-          tabBarIcon: ({ focused, color, size }: { focused: boolean; color: string; size: number }) => (
+          tabBarIcon: ({ focused, color, size }) => (
             <Icon
               source={focused ? 'account' : 'account-outline'}
               size={size}

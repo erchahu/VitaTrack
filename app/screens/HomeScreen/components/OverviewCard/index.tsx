@@ -44,7 +44,8 @@ const OverviewCard = () => {
       <OverviewBottomContainer>
         <OverviewBottomTitle>
           <Icon source='cup-water' size={24} color={theme.colors.secondary} />
-          <Text>{t('home.drink')}{t('home.drinkCurrent', { time: 6 })}</Text>
+          <Text>{t('home.drink')}</Text>
+          <Text style={{ color: theme.colors.outline }}>{t('home.drinkCurrent', { time: 6 })}</Text>
         </OverviewBottomTitle>
         <Icon source='chevron-right' size={20} color={theme.colors.onSurfaceVariant} />
       </OverviewBottomContainer>
