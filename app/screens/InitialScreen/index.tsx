@@ -2,10 +2,8 @@ import React, { memo, useCallback, useState } from "react";
 import { Button, Icon, ProgressBar, Text, useTheme } from "react-native-paper";
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FooterOptLine, InitialWrap, RowContent, RowFooter, RowProgressBar, RowWithPadding, TitleRow } from "./style";
-import InitailGoal from "./components/InitailGoal";
+import { InitialGoal, InitialAge, InitialSex} from "./components";
 import { View } from "react-native";
-import InitailSex from "./components/InitailSex";
-import InitailAge from "./components/InitailAge";
 import { useNavigation } from "@react-navigation/native";
 
 interface InitialData {
@@ -22,9 +20,9 @@ const InitialScreen = () => {
   const insets = useSafeAreaInsets();
 
   const infoArray = [
-    { key: 'goal', title: 'What is your goal?', component: <InitailGoal /> },
-    { key: 'sex', title: 'Male or Female?', desc: 'Men and women need different nutrition approaches', component: <InitailSex /> },
-    { key: 'age', title: 'How old are you?', desc: 'Your age is necessary for establishing an appropriate nutrition plan', component: <InitailAge /> },
+    { key: 'goal', title: 'What is your goal?', component: <InitialGoal /> },
+    { key: 'sex', title: 'Male or Female?', desc: 'Men and women need different nutrition approaches', component: <InitialSex /> },
+    { key: 'age', title: 'How old are you?', desc: 'Your age is necessary for establishing an appropriate nutrition plan', component: <InitialAge /> },
   ]
 
   const handlePrev = useCallback(() => {

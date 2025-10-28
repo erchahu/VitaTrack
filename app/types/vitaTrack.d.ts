@@ -1,10 +1,8 @@
-export { SportCategory, SportCategoryKey, SportsConfig, SportKey } from '@utils/sportsCategory'
-
 declare module 'vitaTrack' {
-  export type SportCategory = SportCategory;
-  export type SportCategoryKey = SportCategoryKey;
-  export type SportsConfig = SportsConfig;
-  export type SportKey = SportKey;
+  export type SportCategory = import('@utils/sportsCategory').SportCategory;
+  export type SportCategoryKey = import('@utils/sportsCategory').SportCategoryKey;
+  export type SportsConfig = import('@utils/sportsCategory').SportsConfig;
+  export type SportKey = import('@utils/sportsCategory').SportKey;
 
-  
+  export type StorageKey =  'sportHistory' | 'firstLaunch';
 }

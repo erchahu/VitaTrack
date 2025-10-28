@@ -2,7 +2,7 @@ import React, { memo } from "react";
 import RowWithCircleRadius from "../../../../styles/RadioGroup/RowWithCircleRadius";
 import { RowWithPadding } from "../../style";
 
-const InitailGoal = () => {
+const InitialGoal = () => {
 
   const goals = [
     { key: 'healthier', title: 'Be healthier', desc: 'Eat and train for optimum health' },
@@ -17,4 +17,4 @@ const InitailGoal = () => {
   )
 }
 
-export default memo(InitailGoal);
+export default memo(InitialGoal);

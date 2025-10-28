@@ -1,7 +1,7 @@
 import React, { memo, useMemo } from 'react';
 import { Button, Card, Text } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
-import { useSportHistoryStore } from '@/stores/useSportHistoryStore';
+import { useSportHistoryStore } from '@/stores';
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import {

@@ -1,8 +1,8 @@
 import Reactotron from "reactotron-react-native"
 import reactotronZustand from 'reactotron-plugin-zustand';
-import { useSportHistoryStore } from "@/stores/useSportHistoryStore";
+import { useSportHistoryStore } from "@/stores";
 
-Reactotron.configure({
+const reactotron = Reactotron.configure({
   name: 'VitaTrack'
 })
   .useReactNative() // add all built-in react native plugins
@@ -14,3 +14,5 @@ Reactotron.configure({
     })
   )
   .connect(); // let's connect!
+
+export default reactotron;

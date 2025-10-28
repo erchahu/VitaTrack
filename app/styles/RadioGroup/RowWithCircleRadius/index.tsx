@@ -1,6 +1,6 @@
 import { memo, useCallback, useState } from 'react';
 import { Text, useTheme } from 'react-native-paper';
-import { RadioItem, RadioItemContent, RowContainer } from './sytle';
+import { RadioItem, RadioItemContent, RowContainer } from './style';
 
 interface RadioItemProps {
   key: string;

@@ -5,7 +5,7 @@ import { AgeContainer, AgeInputWrapper } from './style';
 const INIT_AGE = 6;
 const FINAL_AGE = 99;
 
-const InitailAge = () => {
+const InitialAge = () => {
   const [age, setAge] = useState(INIT_AGE.toString());
 
   const handleAgeChange = (value: string) => {
@@ -46,4 +46,4 @@ const InitailAge = () => {
   );
 };
 
-export default memo(InitailAge);
+export default memo(InitialAge);
