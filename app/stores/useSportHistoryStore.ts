@@ -50,9 +50,12 @@ export const useSportHistoryStore = create<SportsStore>()(
     (set, get) => ({
       sportHistory: [],
 
-      initSportRecord: () => {
-        const result = getStorageItem('sportHistory')
-        console.log(result, 'sera')
+      initSportRecord: async () => {
+        const result = await getStorageItem('sportHistory')
+
+        if (result) {
+          set({ sportHistory: JSON.parse(result) })
+        }
       },
 
       // 添加运动记录
