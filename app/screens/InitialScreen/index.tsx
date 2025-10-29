@@ -2,7 +2,7 @@ import React, { memo, useCallback, useState } from "react";
 import { Button, Icon, ProgressBar, Text, useTheme } from "react-native-paper";
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FooterOptLine, InitialWrap, RowContent, RowFooter, RowProgressBar, RowWithPadding, TitleRow } from "./style";
-import { InitialGoal, InitialAge, InitialSex} from "./components";
+import { InitialGoal, InitialAge, InitialSex, InitialWeight, InitialMood} from "./components";
 import { View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -19,10 +19,16 @@ const InitialScreen = () => {
   const [data, setData] = useState<InitialData>()
   const insets = useSafeAreaInsets();
 
+  const handleMoodPress = (mood: string) => {
+    console.log('选中的情绪:', mood); // 这里使用 useCallback
+  };
+
   const infoArray = [
     { key: 'goal', title: 'What is your goal?', component: <InitialGoal /> },
-    { key: 'sex', title: 'Male or Female?', desc: 'Men and women need different nutrition approaches', component: <InitialSex /> },
-    { key: 'age', title: 'How old are you?', desc: 'Your age is necessary for establishing an appropriate nutrition plan', component: <InitialAge /> },
+    { key: 'sex', title: 'Male or Female?', desc: 'Men and women need \ndifferent nutrition approaches', component: <InitialSex /> },
+    { key: 'age', title: 'How old are you?', desc: 'Your age is necessary \nfor establishing an appropriate nutrition plan', component: <InitialAge /> },
+    { key: 'weight', title: 'Your current weight', desc: 'Your weight is necessary \nfor establishing a good nutrition plan', component: <InitialWeight /> },
+    { key: 'Mood', title: 'Your current mood', desc: '情绪会影响身体状态, 你现在开心吗? 难过? 还是佛系?', component: <InitialMood onMoodPress={handleMoodPress} /> },
   ]
 
   const handlePrev = useCallback(() => {
@@ -37,7 +43,7 @@ const InitialScreen = () => {
 
     // if (currentIndex === 0 && data?.goal === undefined) return;
     setCurrentIndex(currentIndex + 1)
-  }, [currentIndex, data?.goal, infoArray.length])
+  }, [currentIndex, infoArray.length, navigation])
 
   return (
     <InitialWrap>

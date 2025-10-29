@@ -6,12 +6,36 @@
       "sha1": "846897f770455b96c6e46cf2f06f2e437c2ad0d0"
     },
     {
-      "path": "app/assets/images/files/initial_famale.webp",
+      "path": "app/assets/images/files/initial_female.webp",
       "sha1": "ab2967ddd97459ca7c349d40c64828c03103d791"
     },
     {
       "path": "app/assets/images/files/initial_male.webp",
       "sha1": "09a5f2c15460706fdaeadac35c4388bfbb2a95ef"
+    },
+    {
+      "path": "app/assets/images/files/tag_right.webp",
+      "sha1": "b68858fa8af9f8d769234bdfe22540d00170464c"
+    },
+    {
+      "path": "app/assets/animations/files/mood_anger.json",
+      "sha1": "8cf65efc6c652df3c0c46e6b6e6fcd847b322c70"
+    },
+    {
+      "path": "app/assets/animations/files/mood_depressed.json",
+      "sha1": "018dfc848eb86253f5b008b8c193073186f715a5"
+    },
+    {
+      "path": "app/assets/animations/files/mood_happy.json",
+      "sha1": "191a3d323ad9612f8d751979c5c700ab7593f463"
+    },
+    {
+      "path": "app/assets/animations/files/mood_peace.json",
+      "sha1": "ce7619fb7a443d06eb804dc37062c026da6d81e8"
+    },
+    {
+      "path": "app/assets/animations/files/mood_sad.json",
+      "sha1": "437ce5482830ce1a30eb637ec85b1f1a6e0d9141"
     }
   ]
 }

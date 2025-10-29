@@ -12,9 +12,15 @@
 		2B87F0C41A376A5C54CF5472 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		310D7927C03240F4A49D2ACF /* initial_famale.webp in Resources */ = {isa = PBXBuildFile; fileRef = FD7005D123F04DFA81EBDE75 /* initial_famale.webp */; };
 		A7AB4067B911437C985548B1 /* initial_male.webp in Resources */ = {isa = PBXBuildFile; fileRef = 94FCDC4FBA6C48B7A744003C /* initial_male.webp */; };
 		E46B8D7E816C428F9DA74E9E /* home_page.webp in Resources */ = {isa = PBXBuildFile; fileRef = 21213094F60A4D859504B59E /* home_page.webp */; };
+		01FC6D465B104346B3023609 /* initial_female.webp in Resources */ = {isa = PBXBuildFile; fileRef = D4863409223C4081ADB9A7AC /* initial_female.webp */; };
+		F5A3A798FAE844A194A9E573 /* mood_anger.json in Resources */ = {isa = PBXBuildFile; fileRef = 36E32624C048450F8B79D4AD /* mood_anger.json */; };
+		0201B786F8FA4409AB51A790 /* mood_depressed.json in Resources */ = {isa = PBXBuildFile; fileRef = 73A86D43ECA64EBC9AF019A9 /* mood_depressed.json */; };
+		AF6E0E2C3CEF43CB87959A95 /* mood_happy.json in Resources */ = {isa = PBXBuildFile; fileRef = 2AAD196DC6E745469F9F2DB7 /* mood_happy.json */; };
+		FEAC2244FD8348CDA2513CFA /* mood_peace.json in Resources */ = {isa = PBXBuildFile; fileRef = 9F613A5F3BD041EAA8F30237 /* mood_peace.json */; };
+		6BB8B2772DDC4666BE70CF99 /* mood_sad.json in Resources */ = {isa = PBXBuildFile; fileRef = 3B55CCB543084F68BD0F61E4 /* mood_sad.json */; };
+		F225CD218EC14017B3636D09 /* tag_right.webp in Resources */ = {isa = PBXBuildFile; fileRef = C3DA6715D83644998994A1AA /* tag_right.webp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,9 +34,15 @@
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = VitaTrack/AppDelegate.swift; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = VitaTrack/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		FD7005D123F04DFA81EBDE75 /* initial_famale.webp */ = {isa = PBXFileReference; name = "initial_famale.webp"; path = "../app/assets/images/files/initial_famale.webp"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		94FCDC4FBA6C48B7A744003C /* initial_male.webp */ = {isa = PBXFileReference; name = "initial_male.webp"; path = "../app/assets/images/files/initial_male.webp"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		21213094F60A4D859504B59E /* home_page.webp */ = {isa = PBXFileReference; name = "home_page.webp"; path = "../app/assets/images/files/home_page.webp"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D4863409223C4081ADB9A7AC /* initial_female.webp */ = {isa = PBXFileReference; name = "initial_female.webp"; path = "../app/assets/images/files/initial_female.webp"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		36E32624C048450F8B79D4AD /* mood_anger.json */ = {isa = PBXFileReference; name = "mood_anger.json"; path = "../app/assets/animations/files/mood_anger.json"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		73A86D43ECA64EBC9AF019A9 /* mood_depressed.json */ = {isa = PBXFileReference; name = "mood_depressed.json"; path = "../app/assets/animations/files/mood_depressed.json"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2AAD196DC6E745469F9F2DB7 /* mood_happy.json */ = {isa = PBXFileReference; name = "mood_happy.json"; path = "../app/assets/animations/files/mood_happy.json"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		9F613A5F3BD041EAA8F30237 /* mood_peace.json */ = {isa = PBXFileReference; name = "mood_peace.json"; path = "../app/assets/animations/files/mood_peace.json"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3B55CCB543084F68BD0F61E4 /* mood_sad.json */ = {isa = PBXFileReference; name = "mood_sad.json"; path = "../app/assets/animations/files/mood_sad.json"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C3DA6715D83644998994A1AA /* tag_right.webp */ = {isa = PBXFileReference; name = "tag_right.webp"; path = "../app/assets/images/files/tag_right.webp"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,9 +120,15 @@
 		39985F5E2D354659AD716F68 /* Resources */ = {
 			isa = "PBXGroup";
 			children = (
-				FD7005D123F04DFA81EBDE75 /* initial_famale.webp */,
 				94FCDC4FBA6C48B7A744003C /* initial_male.webp */,
 				21213094F60A4D859504B59E /* home_page.webp */,
+				D4863409223C4081ADB9A7AC /* initial_female.webp */,
+				36E32624C048450F8B79D4AD /* mood_anger.json */,
+				73A86D43ECA64EBC9AF019A9 /* mood_depressed.json */,
+				2AAD196DC6E745469F9F2DB7 /* mood_happy.json */,
+				9F613A5F3BD041EAA8F30237 /* mood_peace.json */,
+				3B55CCB543084F68BD0F61E4 /* mood_sad.json */,
+				C3DA6715D83644998994A1AA /* tag_right.webp */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -179,9 +197,15 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				2B87F0C41A376A5C54CF5472 /* PrivacyInfo.xcprivacy in Resources */,
-				310D7927C03240F4A49D2ACF /* initial_famale.webp in Resources */,
 				A7AB4067B911437C985548B1 /* initial_male.webp in Resources */,
 				E46B8D7E816C428F9DA74E9E /* home_page.webp in Resources */,
+				01FC6D465B104346B3023609 /* initial_female.webp in Resources */,
+				F5A3A798FAE844A194A9E573 /* mood_anger.json in Resources */,
+				0201B786F8FA4409AB51A790 /* mood_depressed.json in Resources */,
+				AF6E0E2C3CEF43CB87959A95 /* mood_happy.json in Resources */,
+				FEAC2244FD8348CDA2513CFA /* mood_peace.json in Resources */,
+				6BB8B2772DDC4666BE70CF99 /* mood_sad.json in Resources */,
+				F225CD218EC14017B3636D09 /* tag_right.webp in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
